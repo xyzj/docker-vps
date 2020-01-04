@@ -1,0 +1,35 @@
+server {
+        # listen 80 default_server;
+        # listen [::]:80 default_server;
+
+        # SSL configuration
+        #
+        listen 443 ssl default_server;
+        listen [::]:443 ssl default_server;
+
+        root /var/www/html;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name v4.xyzjdays.xyz;
+
+        ssl_certificate       /root/bin/ca/v2.xyzjdays.xyz.full.cer;
+        ssl_certificate_key   /root/bin/ca/v2.xyzjdays.xyz.key;
+        ssl_protocols         TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers           HIGH:!aNULL:!MD5;
+
+        location /xx { # 与 V2Ray 配置中的 path 保持一致
+                proxy_redirect off;
+                proxy_pass http://127.0.0.1:6891;#假设WebSocket监听在环回地址的10000端口上
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+                proxy_set_header Host $http_host;
+        }
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+        }
+}

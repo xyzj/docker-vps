@@ -1,0 +1,118 @@
+{
+    "log": {
+        "loglevel": "debug",
+        "access": "/tmp/access.log",
+        "error": "/tmp/error.log"
+    },
+    "inbounds": [
+        {
+            "port": 10808,
+            "listen": "127.0.0.1",
+            "protocol": "socks",
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            },
+            "settings": {
+                "auth": "noauth",
+                "udp": false
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "tag": "proxy",
+            "protocol": "vmess",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "v2.xyzjdays.xyz",
+                        "port": 443,
+                        "users": [
+                            {
+                                "id": "d2da6e1d-f04a-48a7-aed3-9b6da8e32aee",
+                                "alterId": 6,
+                                "security": "aes-128-gcm"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "tls",
+                "wsSettings": {
+                    "path": "/xx"
+                }
+            }
+        },
+        {
+            "tag": "direct",
+            "protocol": "freedom",
+            "settings": {
+                "vnext": null,
+                "servers": null,
+                "response": null
+            },
+            "streamSettings": null,
+            "mux": null
+        },
+        {
+            "tag": "block",
+            "protocol": "blackhole",
+            "settings": {
+                "vnext": null,
+                "servers": null,
+                "response": {
+                    "type": "http"
+                }
+            },
+            "streamSettings": null,
+            "mux": null
+        }
+    ],
+    "routing": {
+        "domainStrategy": "IPIfNonMatch",
+		"rules":[
+			{
+                "type": "field",
+                "port": null,
+                "outboundTag": "block",
+                "ip": null,
+                "domain": [
+                    "geosite:category-ads"
+                ]
+            },
+            {
+                "type": "field",
+                "port": null,
+                "outboundTag": "direct",
+                "ip": [
+                    "geoip:private"
+                ],
+                "domain": null
+            },
+            {
+                "type": "field",
+                "port": null,
+                "outboundTag": "direct",
+                "ip": [
+                    "geoip:cn"
+                ],
+                "domain": null
+            },
+            {
+                "type": "field",
+                "port": null,
+                "outboundTag": "direct",
+                "ip": null,
+                "domain": [
+                    "geosite:cn"
+                ]
+            }
+        ]
+    }
+}
