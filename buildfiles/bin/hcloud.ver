@@ -1,8 +1,8 @@
 
 golang micro service
-Version:	1.0.0.191229.38005
+Version:	1.0.0.200229.39924
 Go version:	go1.13.5 linux/amd64
-Build date:	Sun Dec 29 10:33:25 2019
-Build OS:	Linux-4.15.0-72-generic-x86_64-with-Ubuntu-18.04-bionic(moffice)
+Build date:	Sat Feb 29 11:05:24 2020
+Build OS:	Linux-4.15.0-74-generic-x86_64-with-Ubuntu-18.04-bionic(moffice)
 Code by:	Xu Yuan
-Start with:	-debug -http=80 -conf=/root/bin/hcloud.conf
+Start with:	-conf=./hcloud.conf

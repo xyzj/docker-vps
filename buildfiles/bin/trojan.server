@@ -3,7 +3,7 @@
     "local_addr": "0.0.0.0",
     "local_port": 443,
     "remote_addr": "127.0.0.1",
-    "remote_port": 6891,
+    "remote_port": 80,
     "password": [
         "96062b60-2e36-11ea-966e-aaaa000ef3c9",
         "d172ba0f-2e36-11ea-956f-bc8385294f0a"

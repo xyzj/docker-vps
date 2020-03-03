@@ -1,24 +1,61 @@
+upstream hcloud {
+	server 127.0.0.1:6818;
+}
+upstream sslhcloud {
+	server 127.0.0.1:6819;
+}
 server {
-        # listen 80 default_server;
+	listen 80;
+	server_name movie.xyzjdays.xyz v4.xyzjdays.xyz;
+	location / {
+                proxy_pass http://hcloud;
+		proxy_redirect off;
+                proxy_set_header X-real-ip $remote_addr;
+                proxy_set_header Host $http_host;
+        }
+}
+server {
+	listen 443 ssl;
+        server_name movie.xyzjdays.xyz v4.xyzjdays.xyz;
+        ssl_certificate       /root/bin/ca/xyzjdays.xyz.crt;
+        ssl_certificate_key   /root/bin/ca/xyzjdays.xyz.key;
+        ssl_protocols         TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers           HIGH:!aNULL:!MD5;
+	location / {
+                proxy_pass https://sslhcloud;
+                proxy_redirect off;
+                proxy_set_header X-real-ip $remote_addr;
+                proxy_set_header Host $http_host;
+        }
+}
+server {
+        listen 80 default_server;
         # listen [::]:80 default_server;
 
         # SSL configuration
         #
         listen 443 ssl default_server;
-        listen [::]:443 ssl default_server;
+        # listen [::]:443 ssl default_server;
 
-        root /var/www/html;
+#        root /var/www/html;
 
-        index index.html index.htm index.nginx-debian.html;
+#        index index.html index.htm index.nginx-debian.html;
 
-        server_name v4.xyzjdays.xyz;
+        server_name v2.xyzjdays.xyz;
 
-        ssl_certificate       /root/bin/ca/v2.xyzjdays.xyz.full.cer;
-        ssl_certificate_key   /root/bin/ca/v2.xyzjdays.xyz.key;
+        ssl_certificate       /root/bin/ca/xyzjdays.xyz.crt;
+        ssl_certificate_key   /root/bin/ca/xyzjdays.xyz.key;
         ssl_protocols         TLSv1 TLSv1.1 TLSv1.2;
         ssl_ciphers           HIGH:!aNULL:!MD5;
 
-        location /xx { # 与 V2Ray 配置中的 path 保持一致
+	#location / {
+	#	proxy_pass http://hcloud;
+        #        proxy_http_version 1.1;
+        #        proxy_set_header X-real-ip $remote_addr;
+        #        proxy_set_header Host $http_host;	
+	#}
+
+	location /xx { # 与 V2Ray 配置中的 path 保持一致
                 proxy_redirect off;
                 proxy_pass http://127.0.0.1:6891;#假设WebSocket监听在环回地址的10000端口上
                 proxy_http_version 1.1;
@@ -27,9 +64,9 @@ server {
                 proxy_set_header Host $http_host;
         }
 
-        location / {
+        #location / {
                 # First attempt to serve request as file, then
                 # as directory, then fall back to displaying a 404.
-                try_files $uri $uri/ =404;
-        }
+        #        try_files $uri $uri/ =404;
+        #}
 }
