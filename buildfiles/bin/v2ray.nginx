@@ -1,28 +1,39 @@
-upstream hcloud {
-	server 127.0.0.1:6818;
-}
-upstream sslhcloud {
-	server 127.0.0.1:6819;
-}
 server {
 	listen 80;
-	server_name movie.xyzjdays.xyz v4.xyzjdays.xyz;
-	location / {
-                proxy_pass http://hcloud;
-		proxy_redirect off;
-                proxy_set_header X-real-ip $remote_addr;
-                proxy_set_header Host $http_host;
-        }
+	listen 443 ssl;
+	server_name kod.xyzjdays.xyz;
+	ssl_certificate       /root/bin/ca/xyzjdays.xyz.crt;
+        ssl_certificate_key   /root/bin/ca/xyzjdays.xyz.key;
+        ssl_protocols         TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers           HIGH:!aNULL:!MD5;
+	return 307 https://hpc.xyzjdays.xyz:8443;
 }
 server {
+        listen 80;
+        listen 443 ssl;
+        server_name deluge.xyzjdays.xyz;
+        ssl_certificate       /root/bin/ca/xyzjdays.xyz.crt;
+        ssl_certificate_key   /root/bin/ca/xyzjdays.xyz.key;
+        ssl_protocols         TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers           HIGH:!aNULL:!MD5;
+        return 307 https://hpc.xyzjdays.xyz:8443/deluge;
+}
+# hcloud proxy
+server {
+	listen 80;
+	server_name v4.xyzjdays.xyz;
+	rewrite ^(.*)$ https://${server_name}$1 permanent; 
+}
+server {
+#	listen 80;
 	listen 443 ssl;
-        server_name movie.xyzjdays.xyz v4.xyzjdays.xyz;
+        server_name v4.xyzjdays.xyz;
         ssl_certificate       /root/bin/ca/xyzjdays.xyz.crt;
         ssl_certificate_key   /root/bin/ca/xyzjdays.xyz.key;
         ssl_protocols         TLSv1 TLSv1.1 TLSv1.2;
         ssl_ciphers           HIGH:!aNULL:!MD5;
 	location / {
-                proxy_pass https://sslhcloud;
+                proxy_pass https://127.0.0.1:6819;
                 proxy_redirect off;
                 proxy_set_header X-real-ip $remote_addr;
                 proxy_set_header Host $http_host;
