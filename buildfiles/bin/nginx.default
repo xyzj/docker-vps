@@ -16,7 +16,7 @@ server {
         ssl_certificate_key   /root/bin/ca/xyzjdays.xyz.key;
         ssl_protocols         TLSv1 TLSv1.1 TLSv1.2;
         ssl_ciphers           HIGH:!aNULL:!MD5;
-        return 307 https://hpc.xyzjdays.xyz:8443/deluge;
+        return 307 https://hpc.xyzjdays.xyz:8112;
 }
 # hcloud proxy
 server {

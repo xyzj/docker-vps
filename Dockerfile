@@ -23,7 +23,7 @@ RUN			/bin/echo 'root:administratorishere' |chpasswd; \
 			/bin/echo 'export PATH=$PATH:/root/bin'>> /root/.bashrc; \
 			cp /root/bin/privoxy.config /etc/privoxy/config; \
                         cp /root/bin/gfw.action /etc/privoxy/gfw.action; \
-                        cp /root/bin/v2ray.nginx /etc/nginx/sites-enabled/default; \
+                        cp /root/bin/nginx.default /etc/nginx/sites-enabled/default; \
 			echo "7 7 * * 7 /root/bin/sslrenew.sh">> /var/spool/cron/crontabs/root
 #				curl  https://get.acme.sh | sh; \
 #				echo "1 1 1 * * /root/bin/acmerenew.sh">> /var/spool/cron/crontabs/root; \
