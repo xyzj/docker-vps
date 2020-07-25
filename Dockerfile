@@ -11,7 +11,7 @@ RUN			/usr/bin/apt-get -y update; \
 			/usr/bin/apt-get -y autoclean; \
 			rm -rfv /tmp/*
 
-COPY			buildfiles /root
+COPY		buildfiles /root
 
 RUN			/bin/echo 'root:administratorishere' |chpasswd; \
 			ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime; \
@@ -22,8 +22,9 @@ RUN			/bin/echo 'root:administratorishere' |chpasswd; \
 			/bin/echo "net.ipv6.ip_forward=1">>/etc/sysctl.conf; \
 			/bin/echo 'export PATH=$PATH:/root/bin'>> /root/.bashrc; \
 			cp /root/bin/privoxy.config /etc/privoxy/config; \
-                        cp /root/bin/gfw.action /etc/privoxy/gfw.action; \
-                        cp /root/bin/nginx.default /etc/nginx/sites-enabled/default; \
+            cp /root/bin/gfw.action /etc/privoxy/gfw.action; \
+            cp /root/bin/nginx.default /etc/nginx/sites-enabled/default; \
+			mkdir /tmp/ttt; \
 			echo "7 7 * * 7 /root/bin/sslrenew.sh">> /var/spool/cron/crontabs/root
 #				curl  https://get.acme.sh | sh; \
 #				echo "1 1 1 * * /root/bin/acmerenew.sh">> /var/spool/cron/crontabs/root; \

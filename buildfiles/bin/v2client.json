@@ -1,8 +1,8 @@
 {
     "log": {
-        "loglevel": "debug",
-        "access": "/tmp/access.log",
-        "error": "/tmp/error.log"
+        "loglevel": "error",
+        "access": "/tmp/ttt/access.log",
+        "error": "/tmp/ttt/error.log"
     },
     "inbounds": [
         {

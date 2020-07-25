@@ -1,6 +1,7 @@
 #!/bin/bash
 
 pkill -f trojan
+pkill -f v2ray
 
 # service privoxy restart
 
