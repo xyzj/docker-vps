@@ -25,7 +25,11 @@ RUN			/bin/echo 'root:administratorishere' |chpasswd; \
             cp /root/bin/gfw.action /etc/privoxy/gfw.action; \
             cp /root/bin/nginx.default /etc/nginx/sites-enabled/default; \
 			mkdir /tmp/ttt; \
-			echo "7 7 * * 7 /root/bin/sslrenew.sh">> /var/spool/cron/crontabs/root
+			echo "7 7 * * 7 /root/bin/sslrenew.sh">> /var/spool/cron/crontabs/root; \
+			echo "export NAMESILO_API_KEY=f59e74d5e3f373b9e332e9b">> /root/.bashrc; \
+			echo "export NAMESILO_PROPAGATION_TIMEOUT=1800">> /root/.bashrc; \
+			echo "export NAMESILO_TTL=7207">> /root/.bashrc; \
+			echo "export NAMESILO_POLLING_INTERVAL=30">> /root/.bashrc
 #				curl  https://get.acme.sh | sh; \
 #				echo "1 1 1 * * /root/bin/acmerenew.sh">> /var/spool/cron/crontabs/root; \
 
