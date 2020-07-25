@@ -1,5 +1,5 @@
 {
 	"domain": "*.xyzjdays.xyz",
-	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03afe62ecfd0530a89136dbd5421db0a636e",
-	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03afe62ecfd0530a89136dbd5421db0a636e"
+	"certUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03f6ee7a9809f644f6e05615c120a2af21c1",
+	"certStableUrl": "https://acme-v02.api.letsencrypt.org/acme/cert/03f6ee7a9809f644f6e05615c120a2af21c1"
 }

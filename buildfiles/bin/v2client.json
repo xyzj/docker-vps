@@ -6,6 +6,17 @@
     },
     "inbounds": [
         {
+            "port": 8119,
+            "listen": "0.0.0.0",
+            "protocol": "http",
+            "settings": {
+                "timeout": 0,
+                "accounts": [],
+                "allowTransparent": false,
+                "userLevel": 0
+            }
+        },
+        {
             "port": 10808,
             "listen": "127.0.0.1",
             "protocol": "socks",
@@ -33,7 +44,7 @@
                         "port": 443,
                         "users": [
                             {
-                                "id": "d2da6e1d-f04a-48a7-aed3-9b6da8e32aee",
+                                "id": "f30c9b1a-ce1c-11ea-b97b-1ffc83514f09",
                                 "alterId": 6,
                                 "security": "aes-128-gcm"
                             }
@@ -76,8 +87,8 @@
     ],
     "routing": {
         "domainStrategy": "IPIfNonMatch",
-		"rules":[
-			{
+        "rules": [
+            {
                 "type": "field",
                 "port": null,
                 "outboundTag": "block",

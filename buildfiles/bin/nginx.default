@@ -18,6 +18,17 @@ server {
         ssl_ciphers           HIGH:!aNULL:!MD5;
         return 307 https://hpc.xyzjdays.xyz:8112;
 }
+server {
+        listen 80;
+        listen 443 ssl;
+        server_name mlnet.xyzjdays.xyz;
+        ssl_certificate       /root/bin/ca/xyzjdays.xyz.crt;
+        ssl_certificate_key   /root/bin/ca/xyzjdays.xyz.key;
+        ssl_protocols         TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers           HIGH:!aNULL:!MD5;
+        return 307 http://hpc.xyzjdays.xyz:8113;
+}
+
 # hcloud proxy
 server {
 	listen 80;
@@ -66,9 +77,9 @@ server {
         #        proxy_set_header Host $http_host;	
 	#}
 
-	location /xx { # 与 V2Ray 配置中的 path 保持一致
+	location /xx { 
                 proxy_redirect off;
-                proxy_pass http://127.0.0.1:6891;#假设WebSocket监听在环回地址的10000端口上
+                proxy_pass http://127.0.0.1:6891;
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection "upgrade";
