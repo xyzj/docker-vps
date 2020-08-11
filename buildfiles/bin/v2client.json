@@ -40,6 +40,17 @@
             "settings": {
                 "vnext": [
                     {
+                        "address": "v2cf.xyzjdays.xyz",
+                        "port": 443,
+                        "users": [
+                            {
+                                "id": "f30c9b1a-ce1c-11ea-b97b-1ffc83514f09",
+                                "alterId": 6,
+                                "security": "aes-128-gcm"
+                            }
+                        ]
+                    },
+                    {
                         "address": "v2.xyzjdays.xyz",
                         "port": 443,
                         "users": [
