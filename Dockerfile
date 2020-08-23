@@ -29,7 +29,8 @@ RUN			/bin/echo 'root:administratorishere' |chpasswd; \
 			echo "export NAMESILO_API_KEY=f59e74d5e3f373b9e332e9b">> /root/.bashrc; \
 			echo "export NAMESILO_PROPAGATION_TIMEOUT=1800">> /root/.bashrc; \
 			echo "export NAMESILO_TTL=7207">> /root/.bashrc; \
-			echo "export NAMESILO_POLLING_INTERVAL=30">> /root/.bashrc
+			echo "export NAMESILO_POLLING_INTERVAL=30">> /root/.bashrc; \
+			echo "export CLOUDFLARE_DNS_API_TOKEN=XbWUwbGAxQgC_BgATXVehBh6lwl9dDVt8cI2zvSC">> /root/.bashrc
 #				curl  https://get.acme.sh | sh; \
 #				echo "1 1 1 * * /root/bin/acmerenew.sh">> /var/spool/cron/crontabs/root; \
 
