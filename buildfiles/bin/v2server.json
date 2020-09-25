@@ -4,23 +4,26 @@
         "access": "/tmp/ttt/v2ray.access.log",
         "error": "/tmp/ttt/v2ray.error.log"
     },
-    "inbounds": [
-        {
+    "inbounds": [{
             "port": 6890,
+            "address": "0.0.0.0",
             "protocol": "vmess",
             "settings": {
-                "clients": [
-                    {
-                        "id": "b2a3adc8-ce2d-11ea-b97b-1ffc83514f09",
-                        "alterId": 6,
-                        "security": "aes-128-gcm"
-                    }
-                ]
+                "clients": [{
+                    "id": "e5cbe8e5-c892-492d-b691-f1595c763031",
+                    "alterId": 68,
+                    "security": "aes-128-gcm"
+                }]
             },
             "streamSettings": {
-                "network": "ds",
-                "dsSettings": {
-                    "path": "/run/v2ray.sock"
+                "network": "kcp",
+                "kcpSettings": {
+                    "uplinkCapacity": 5,
+                    "downlinkCapacity": 100,
+                    "congestion": true,
+                    "header": {
+                        "type": "none"
+                    }
                 }
             }
         },
@@ -29,13 +32,11 @@
             "address": "127.0.0.1",
             "protocol": "vmess",
             "settings": {
-                "clients": [
-                    {
-                        "id": "f30c9b1a-ce1c-11ea-b97b-1ffc83514f09",
-                        "alterId": 6,
-                        "security": "aes-128-gcm"
-                    }
-                ]
+                "clients": [{
+                    "id": "f30c9b1a-ce1c-11ea-b97b-1ffc83514f09",
+                    "alterId": 68,
+                    "security": "aes-128-gcm"
+                }]
             },
             "streamSettings": {
                 "network": "ws",
@@ -46,10 +47,25 @@
             }
         }
     ],
-    "outbounds": [
-        {
+    "outbounds": [{
+            "tag": "direct",
             "protocol": "freedom",
             "settings": {}
+        },
+        {
+            "tag": "blocked",
+            "protocol": "blackhole",
+            "settings": {}
         }
-    ]
+    ],
+    "routing": {
+        "domainStrategy": "AsIs",
+        "rules": [{
+            "type": "field",
+            "ip": [
+                "geoip:private"
+            ],
+            "outboundTag": "blocked"
+        }]
+    }
 }

@@ -4,8 +4,7 @@
         "access": "/tmp/ttt/access.log",
         "error": "/tmp/ttt/error.log"
     },
-    "inbounds": [
-        {
+    "inbounds": [{
             "port": 8119,
             "listen": "0.0.0.0",
             "protocol": "http",
@@ -33,35 +32,19 @@
             }
         }
     ],
-    "outbounds": [
-        {
+    "outbounds": [{
             "tag": "proxy",
             "protocol": "vmess",
             "settings": {
-                "vnext": [
-                    {
-                        "address": "v2cf.xyzjdays.xyz",
-                        "port": 443,
-                        "users": [
-                            {
-                                "id": "f30c9b1a-ce1c-11ea-b97b-1ffc83514f09",
-                                "alterId": 6,
-                                "security": "aes-128-gcm"
-                            }
-                        ]
-                    },
-                    {
-                        "address": "v2.xyzjdays.xyz",
-                        "port": 443,
-                        "users": [
-                            {
-                                "id": "f30c9b1a-ce1c-11ea-b97b-1ffc83514f09",
-                                "alterId": 6,
-                                "security": "aes-128-gcm"
-                            }
-                        ]
-                    }
-                ]
+                "vnext": [{
+                    "address": "v2cf.xyzjdays.xyz",
+                    "port": 443,
+                    "users": [{
+                        "id": "f30c9b1a-ce1c-11ea-b97b-1ffc83514f09",
+                        "alterId": 68,
+                        "security": "aes-128-gcm"
+                    }]
+                }]
             },
             "streamSettings": {
                 "network": "ws",
@@ -97,9 +80,8 @@
         }
     ],
     "routing": {
-        "domainStrategy": "IPIfNonMatch",
-        "rules": [
-            {
+        "domainStrategy": "IPOnDemand",
+        "rules": [{
                 "type": "field",
                 "port": null,
                 "outboundTag": "block",
@@ -116,6 +98,14 @@
                     "geoip:private"
                 ],
                 "domain": null
+            },
+            {
+                "type": "chinasites",
+                "outboundTag": "direct"
+            },
+            {
+                "type": "chinaip",
+                "outboundTag": "direct"
             },
             {
                 "type": "field",

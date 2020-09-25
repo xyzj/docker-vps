@@ -1,0 +1,12 @@
+{
+	"email": "minamoto.xu@hotmail.com",
+	"registration": {
+		"body": {
+			"status": "valid",
+			"contact": [
+				"mailto:minamoto.xu@hotmail.com"
+			]
+		},
+		"uri": "https://acme-v02.api.letsencrypt.org/acme/acct/97606700"
+	}
+}
