@@ -1,7 +1,6 @@
 FROM ubuntu:latest
-MAINTAINER      X.Minamoto "xuyuan8720@189.cn"
-
-ENV DEBIAN_FRONTEND noninteractive
+LABEL maintainer="X.Minamoto"
+ENV DEBIAN_FRONTEND=noninteractive LANG=C.UTF-8
 
 RUN			/usr/bin/apt-get -y update; \
 			/usr/bin/apt-get -y upgrade; \
