@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive LANG=C.UTF-8
 
 RUN			/usr/bin/apt-get -y update; \
 			/usr/bin/apt-get -y upgrade; \
-			/usr/bin/apt-get -y install curl socat apt-utils net-tools nano tzdata ssh cron privoxy nginx openssh-client; \
+			/usr/bin/apt-get -y install curl socat apt-utils net-tools nano tzdata cron nginx openssh-client; \
 			/usr/bin/apt-get -y autoremove; \
 			/usr/bin/apt-get -y clean; \
 			/usr/bin/apt-get -y autoclean; \
