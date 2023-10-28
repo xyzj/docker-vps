@@ -76,7 +76,11 @@
         {
             "tag": "blocked",
             "protocol": "blackhole",
-            "settings": {}
+            "settings": {
+		"response": {
+                    "type": "none"
+                }
+	    }
         }
     ],
     "routing": {
