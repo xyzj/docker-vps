@@ -1,0 +1,83 @@
+{
+    "inbounds": [
+        {
+            "listen": "0.0.0.0",
+            "port": 8122,
+            "protocol": "http",
+            "settings": {
+                "accounts": [],
+                "allowTransparent": true,
+                "timeout": 30,
+                "userLevel": 0
+            },
+            "sniffing": {
+                "enabled": false,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ],
+                "metadataOnly": true
+            }
+        },
+	{
+            "listen": "0.0.0.0",
+            "port": 8123,
+            "protocol": "socks",
+            "settings": {
+                "accounts": [],
+                "auth": "none",
+                "ip": "127.0.0.1",
+                "udp": true
+            },
+            "sniffing": {
+                "destOverride": [
+                    "http",
+                    "tls"
+                ],
+                "enabled": false,
+                "metadataOnly": true
+            }
+        }
+    ],
+    "log": {
+        "loglevel": "none"
+    },
+    "routing": {
+        "domainMatcher": "mph",
+        "domainStrategy": "IPIfNonMatch",
+        "rules": [
+            {
+                "domain": [
+		    "domain:ytimg.com",
+		    "domain:overseauspider.yuanshen.com",
+		    "domain:qos.multiplay.com",
+		    "domain:fallguys-prod-player-level.azureedge.net",
+		    "domain:api.epicgames.dev",
+		    "domain:login.fallguys.oncatapult.com",
+                    "domain:aliyundrive-oauth.messense.me",
+		    "domain:sessiondirectory.xboxlive.com",
+                    "domain:sisu.xboxlive.com",
+                    "domain:login.live.com",
+                    "domain:xsts.auth.xboxlive.com"
+                ],
+                "outboundTag": "proxy",
+                "type": "field"
+            },
+            {
+                "domain": [
+                    "geosite:category-ads-all"
+                ],
+                "ip": [],
+                "outboundTag": "direct",
+                "type": "field"
+            },
+            {
+                "outboundTag": "direct",
+                "protocol": [
+                    "bittorrent"
+                ],
+                "type": "field"
+            }
+        ]
+    }
+}

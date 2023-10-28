@@ -1,0 +1,15 @@
+{
+    "routing": {
+	"rules": [
+	    {
+                "domain": [
+		    "geosite:gfw",
+		    "domain:mikanani.me",
+                    "domain:githubusercontent.com"
+                ,"domain:bandwagonhost.com","domain:openai.com"],
+                "outboundTag": "proxy",
+                "type": "field"
+            }
+	]
+    }
+}

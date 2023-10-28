@@ -1,0 +1,83 @@
+{
+	storage file_system {
+		root /opt/bin/caddy_data
+	}
+}
+(common_headers) {
+	encode gzip
+}
+(tls_conf_cf) {
+	tls {
+		#read:1Kk_K_IAY9ubAYNPWon2wAvutE-1tcn1NJGDsnSp
+		#edit:8uJA0SpFcu_NSM238WkMpQJi4VvuPEdHe6_6dy2o
+		dns cloudflare 8uJA0SpFcu_NSM238WkMpQJi4VvuPEdHe6_6dy2o
+	}
+}
+(tls_conf) {
+	tls /opt/bin/ca/xyzjdays.xyz.crt /opt/bin/ca/xyzjdays.xyz.key
+}
+(tls_self) {
+	tls /opt/bin/ca/localhost.pem /opt/bin/ca/localhost-key.pem
+}
+(log_conf) {
+	log {
+		output file "/tmp/log/caddy.log" {
+			roll_size 10mb
+			roll_keep 1
+			roll_keep_for 3d
+		}
+	}
+}
+# wewillsee
+(ba_wall) {
+	basicauth /* {
+		outsidethewall JDJhJDE0JFY3ZGlKOTNHSEdYVGRiVTUwWnpzVC5MWndJaEdaMXouSXhpY3BWSGtYZlQxY29CbkZiZTdP
+	}
+}
+#http://v4.xyzjdays.xyz, http://xyzjdays.xyz {
+#	redir https://{host}{uri}
+#}
+v2.xyzjdays.xyz:2053, v2cf.xyzjdays.xyz:2053 {
+	#  import common_headers
+	import tls_conf_cf
+	import log_conf
+	@ws_troj {
+		path /lessismore
+		header Connection Upgrade
+		header Upgrade websocket
+	}
+	@ws_less {
+		path /maybenot
+		header Connection Upgrade
+		header Upgrade websocket
+	}
+	@ws_mess {
+		path /allmess
+		header Connection Upgrade
+		header Upgrade websocket
+	}
+	route {
+		reverse_proxy @ws_troj 127.0.0.1:6891
+		reverse_proxy @ws_less 127.0.0.1:6892
+		reverse_proxy @ws_mess 127.0.0.1:6893
+		reverse_proxy 127.0.0.1:2052
+	}
+	abort
+}
+#v2.xyzjdays.xyz {
+#  import common_headers
+#  import log_conf
+#	import tls_conf_cf
+#	handle /allmess {
+#	header Connection Upgrade
+#	header Upgrade websocket
+#	reverse_proxy 127.0.0.1:6893
+#	}
+#	reverse_proxy http://127.0.0.1:2052
+#}
+#xyzjdays.xyz {
+#  import common_headers
+#  import log_conf
+#	import tls_conf_cf
+#	redir https://v4.xyzjdays.xyz/short{uri} 302
+#}

@@ -1,0 +1,103 @@
+{
+    "log": {
+        "loglevel": "info"
+    },
+    "inbounds": [
+        {
+            "port": 6891,
+            "listen": "127.0.0.1",
+            "protocol": "trojan",
+            "settings": {
+                "clients": [
+                    {
+                        "password": "737734f2-631d-11ee-adcb-aaaa000ef3c9"
+                    },
+                    {
+                        "password": "8cddda8b-631c-11ee-ab2d-2446c8cba7d0"
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "none",
+                "wsSettings": {
+                    "path": "/lessismore",
+                    "connectionReuse": true
+                }
+            }
+        },
+        {
+            "port": 6892,
+            "listen": "127.0.0.1",
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "e6ad7a19-631c-11ee-ab2d-2446c8cba7d0"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "ws",
+                "wsSettings": {
+                    "path": "/maybenot",
+                    "connectionReuse": true
+                }
+            }
+        },
+        {
+            "port": 6893,
+            "listen": "127.0.0.1",
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "681cfdc8-6325-11ee-979a-aaaa000ef3c9"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "ws",
+                "wsSettings": {
+                    "path": "/allmess",
+                    "connectionReuse": true
+                }
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "tag": "direct",
+            "protocol": "freedom",
+            "settings": {}
+        },
+        {
+            "tag": "blocked",
+            "protocol": "blackhole",
+            "settings": {}
+        }
+    ],
+    "routing": {
+        "domainStrategy": "IPIfNonMatch",
+        "domainMatcher": "mph",
+        "rules": [
+	    {
+                "domain": [
+                    "google-analytics.com",
+                    "geosite:category-ads-all"
+                ],
+                "outboundTag": "block",
+                "type": "field"
+            },
+            {
+                "type": "field",
+                "ip": [
+                    "ext:geoip-only-cn-private.dat:private"
+                ],
+                "outboundTag": "blocked"
+            }
+        ]
+    }
+}

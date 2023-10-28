@@ -1,0 +1,30 @@
+{
+    "outbounds": [
+        {
+            "tag": "proxy",
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "v2cf.xyzjdays.xyz",
+                        "port": 2053,
+                        "users": [
+                            {
+                                "id": "681cfdc8-6325-11ee-979a-aaaa000ef3c9",
+                                "level": 0,
+                                "encryption": "none"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "tls",
+                "wsSettings": {
+                    "path": "/allmess"
+                }
+            }
+        }
+    ]
+}

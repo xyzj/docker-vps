@@ -1,0 +1,17 @@
+caddy:
+    enable: true
+    exec: /opt/bin/caddy_linux_amd64_custom
+    params:
+        - run
+        - --config=/opt/bin/Caddyfile
+v2ray:
+    enable: true
+    exec: /opt/bin/v2ray
+    params:
+        - run
+        - -config=/opt/bin/v2server.json
+vpstools:
+    enable: false
+    exec: /opt/bin/vpstools
+    params:
+        - -http=127.0.0.1:2052

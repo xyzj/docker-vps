@@ -1,0 +1,27 @@
+{
+    "outbounds": [
+        {
+            "protocol": "trojan",
+            "settings": {
+                "servers": [
+                    {
+                        "address": "v2cf.xyzjdays.xyz",
+                        "password": "8cddda8b-631c-11ee-ab2d-2446c8cba7d0",
+                        "port": 2053
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "tls",
+                "tlsSettings": {
+                    "allowInsecure": true
+                },
+                "wsSettings": {
+                    "path": "/lessismore"
+                }
+            },
+            "tag": "proxy"
+        }
+    ]
+}

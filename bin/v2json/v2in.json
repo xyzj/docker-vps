@@ -1,0 +1,121 @@
+{
+    "inbounds": [
+        {
+            "listen": "0.0.0.0",
+            "port": 8119,
+            "protocol": "http",
+            "settings": {
+                "accounts": [],
+                "allowTransparent": false,
+                "timeout": 30,
+                "userLevel": 0
+            },
+            "sniffing": {
+                "destOverride": [
+                    "http",
+                    "tls"
+                ],
+                "enabled": true,
+                "metadataOnly": true
+            }
+        },
+        {
+            "listen": "0.0.0.0",
+            "port": 8120,
+            "protocol": "http",
+            "settings": {
+                "accounts": [
+                    {
+                        "pass": "no2typeB",
+                        "user": "YoRHa"
+                    }
+                ],
+                "allowTransparent": false,
+                "timeout": 30,
+                "userLevel": 0
+            },
+            "sniffing": {
+                "destOverride": [
+                    "http",
+                    "tls"
+                ],
+                "enabled": true,
+                "metadataOnly": true
+            }
+        },
+        {
+            "listen": "0.0.0.0",
+            "port": 8121,
+            "protocol": "socks",
+            "settings": {
+                "accounts": [
+                    {
+                        "pass": "no2typeB",
+                        "user": "YoRHa"
+                    }
+                ],
+                "auth": "password",
+                "ip": "127.0.0.1",
+                "udp": false
+            },
+            "sniffing": {
+                "destOverride": [
+                    "http",
+                    "tls"
+                ],
+                "enabled": true,
+                "metadataOnly": true
+            }
+        }
+    ],
+    "log": {
+        "loglevel": "none"
+    },
+    "routing": {
+        "domainMatcher": "mph",
+        "domainStrategy": "IPIfNonMatch",
+        "rules": [
+            {
+                "domain": [
+		    "google-analytics.com",
+                    "geosite:category-ads-all"
+                ],
+                "outboundTag": "block",
+                "type": "field"
+            },
+            {
+                "outboundTag": "direct",
+                "protocol": [
+                    "bittorrent"
+                ],
+                "type": "field"
+            },
+            {
+                "domain": [
+                    "baidu.com",
+                    "ecosia.org",
+                    "geosite:cn"
+                ],
+                "outboundTag": "direct",
+                "type": "field"
+            },
+            {
+                "ip": [
+                    "192.168.50.0/24",
+                    "192.168.1.0/24",
+                    "ext:geoip-only-cn-private.dat:cn",
+                    "ext:geoip-only-cn-private.dat:private"
+                ],
+                "outboundTag": "direct",
+                "type": "field"
+            },
+	    {
+		"domain": [
+		    "geosite:gfw"
+		],
+		"outboundTag": "proxy",
+		"type": "field"
+	    }
+        ]
+    }
+}
