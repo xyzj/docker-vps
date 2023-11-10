@@ -8,7 +8,7 @@
         "rules": [
             {
                 "domain": [
-		    "google-analytics.com",
+                    "google-analytics.com",
                     "geosite:category-ads-all"
                 ],
                 "outboundTag": "block",
@@ -40,13 +40,13 @@
                 "outboundTag": "direct",
                 "type": "field"
             },
-	    {
-		"domain": [
-		    "geosite:gfw"
-		],
-		"outboundTag": "proxy",
-		"type": "field"
-	    }
+            {
+                "domain": [
+                    "geosite:gfw"
+                ],
+                "outboundTag": "proxy",
+                "type": "field"
+            }
         ]
     }
 }

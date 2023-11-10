@@ -32,13 +32,12 @@ type serviceParams struct {
 }
 
 var (
-	stdlog        logger.Logger
-	svrconf       *config.Formatted[serviceParams] // = mapPS{locker: sync.RWMutex{}, data: make(map[string]*serviceParams), yamlfile: yaml.New(pathtool.JoinPathFromHere("extsvr.yaml"))}
-	sendfmt       = `%20s|%s|`
+	stdlog  logger.Logger
+	svrconf *config.Formatted[serviceParams] // = mapPS{locker: sync.RWMutex{}, data: make(map[string]*serviceParams), yamlfile: yaml.New(pathtool.JoinPathFromHere("extsvr.yaml"))}
+	// sendfmt       = `%20s|%s|`
 	psock         = pathtool.JoinPathFromHere("extsvrd.sock")
-	chktimer      = 60
 	version       = "0.0.0"
-	chanTCControl = make(chan string, 30)
+	chanTCControl = make(chan string)
 )
 
 func manualstop(name string, stop bool) {
@@ -333,7 +332,7 @@ in this case, $pubip will be replace to the result of 'curl -s 4.ipw.cn'`,
 				continue
 			}
 			chanTCControl <- "stop"
-			go recv(&unixClient{
+			recv(&unixClient{
 				conn:  fd,
 				buf:   make([]byte, 2048),
 				cache: bytes.Buffer{},
@@ -351,7 +350,7 @@ func recv(cli *unixClient) {
 		cli.conn.Close()
 	}()
 	for {
-		cli.conn.SetReadDeadline(time.Now().Add(time.Minute))
+		cli.conn.SetReadDeadline(time.Now().Add(time.Second * 10))
 		n, err := cli.conn.Read(cli.buf)
 		if err != nil {
 			if err != io.EOF {

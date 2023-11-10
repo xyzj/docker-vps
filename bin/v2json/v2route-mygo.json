@@ -1,15 +1,24 @@
 {
     "routing": {
-	"rules": [
-	    {
+        "rules": [
+            {
                 "domain": [
-		    "geosite:gfw",
-		    "domain:mikanani.me",
-                    "domain:githubusercontent.com"
-                ,"domain:bandwagonhost.com","domain:openai.com"],
+                    "domain:gtv3.com"
+                ],
+                "outboundTag": "block",
+                "type": "field"
+            },
+            {
+                "domain": [
+                    "domain:mikanani.me",
+                    "domain:githubusercontent.com",
+                    "domain:bandwagonhost.com",
+                    "domain:openai.com",
+                    "domain:v2fly.org"
+                ],
                 "outboundTag": "proxy",
                 "type": "field"
             }
-	]
+        ]
     }
 }
